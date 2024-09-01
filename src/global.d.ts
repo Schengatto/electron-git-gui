@@ -25,6 +25,7 @@ declare global {
       unstageAllFiles: () => Promise<boolean>;
       commit: (message: string) => Promise<boolean>;
       push: (force: boolean) => Promise<boolean>;
+      hasCommitsToPush: () => Promise<boolean>;
     };
     updateGitGraph: (local: string[], remote: string[], current: string) => void;
   }

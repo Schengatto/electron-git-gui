@@ -7,8 +7,9 @@ let git: SimpleGit;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1100,
+    height: 800,
+    autoHideMenuBar: true, // This line hides the menu bar
     webPreferences: {
       preload: path.join(__dirname, '..', 'preload', 'preload.js'),
       contextIsolation: true,
@@ -158,6 +159,16 @@ app.whenReady().then(() => {
       return true;
     } catch (error) {
       console.error('Git push error:', error);
+      return false;
+    }
+  });
+
+  ipcMain.handle('git:hasCommitsToPush', async () => {
+    try {
+      const status = await git.status();
+      return status.ahead > 0;
+    } catch (error) {
+      console.error('Error checking for commits to push:', error);
       return false;
     }
   });

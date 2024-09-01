@@ -11,5 +11,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   stageAllFiles: () => ipcRenderer.invoke('git:stageAllFiles'),
   unstageAllFiles: () => ipcRenderer.invoke('git:unstageAllFiles'),
   commit: (message: string) => ipcRenderer.invoke('git:commit', message),
-  push: (force: boolean) => ipcRenderer.invoke('git:push', force)
+  push: (force: boolean) => ipcRenderer.invoke('git:push', force),
+  hasCommitsToPush: () => ipcRenderer.invoke('git:hasCommitsToPush'),
 });

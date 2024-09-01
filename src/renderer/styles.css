@@ -1,215 +1,284 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f5f6fa;
+    --text-color: #34495e;
+    --border-color: #dcdde1;
+    --hover-color: #2980b9;
+    --error-color: #e74c3c;
+    --success-color: #27ae60;
 }
 
-h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 30px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
 }
 
 .container {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.left-panel,
+.right-panel {
+    flex: 1;
+    padding: 20px;
 }
 
 .left-panel {
-    flex: 1;
-    padding-right: 20px;
+    background-color: #f8f9fa;
+    border-right: 1px solid var(--border-color);
 }
 
-.right-panel {
-    flex: 1;
-    padding-left: 20px;
-    border-left: 1px solid #ccc;
+h1,
+h2,
+h3 {
+    color: var(--primary-color);
+    margin-top: 0;
 }
 
 button {
-    background-color: #3498db;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 10px 15px;
     margin: 5px 0;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 14px;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: var(--hover-color);
 }
 
 button:disabled {
-    background-color: #bdc3c7;
+    background-color: var(--border-color);
     cursor: not-allowed;
 }
 
-#selectedDir, #currentBranch {
-    background-color: #ecf0f1;
+#selectedDir,
+#currentBranch {
+    background-color: #ffffff;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 4px;
     margin-bottom: 10px;
+    border: 1px solid var(--border-color);
 }
 
-#branchList, #stagedFiles, #changedFiles {
+#branchList,
+#stagedFiles,
+#unstagedFiles {
     list-style-type: none;
     padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
 }
 
-#branchList li, #stagedFiles li, #changedFiles li {
+#branchList li,
+#stagedFiles li,
+#unstagedFiles li {
     padding: 10px;
     background-color: white;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#branchList li:last-child,
+#stagedFiles li:last-child,
+#unstagedFiles li:last-child {
+    border-bottom: none;
 }
 
 #branchList li:hover {
-    background-color: #e0e0e0;
+    background-color: #f1f2f6;
 }
 
 #branchList li.current {
     font-weight: bold;
-    background-color: #d5f5e3;
+    background-color: #ecf0f1;
 }
 
 #branchList li.local {
-    border-left: 5px solid #3498db;
+    border-left: 4px solid var(--primary-color);
 }
 
 #branchList li.remote {
-    border-left: 5px solid #e74c3c;
+    border-left: 4px solid var(--secondary-color);
 }
 
-#branchList li.header, h3 {
+#branchList li.header,
+h3 {
     font-weight: bold;
-    background-color: #34495e;
-    color: white;
+    background-color: #ecf0f1;
+    color: var(--text-color);
     pointer-events: none;
 }
 
 .error {
-    color: #e74c3c;
+    color: var(--error-color);
     background-color: #fadbd8;
     padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-#stagedFiles li {
-    border-left: 5px solid #27ae60;
-}
-
-#changedFiles li {
-    border-left: 5px solid #f39c12;
-}
-
-.branch-tree-options {
-    margin-bottom: 10px;
-}
-
-.branch-tree-options label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.branch-tree-options input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.branch-tree {
-    font-family: monospace;
-    white-space: pre;
-    overflow-x: auto;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
     border-radius: 4px;
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.branch-tree-line {
-    display: flex;
-    align-items: center;
-}
-
-.branch-name {
-    font-weight: bold;
-    padding: 2px 4px;
-    border-radius: 3px;
-    margin: 0 4px;
-}
-
-.commit-hash {
-    color: #6c757d;
-    font-weight: bold;
-    margin-right: 4px;
+    margin-top: 10px;
 }
 
 .file-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    margin-bottom: 4px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-
-.file-item:hover {
-    background-color: #e9ecef;
 }
 
 .file-name {
     flex-grow: 1;
-    margin-right: 8px;
 }
 
 .file-status {
-    padding: 2px 6px;
+    margin: 0 10px;
+    padding: 2px 5px;
     border-radius: 3px;
     font-size: 0.8em;
     font-weight: bold;
-    margin-right: 8px;
 }
 
 .file-action {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 4px 8px;
+    padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
-.file-action:hover {
-    background-color: #0056b3;
+.commit-form {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.modified .file-status { background-color: #ffc107; color: #000; }
-.new .file-status { background-color: #28a745; color: #fff; }
-.deleted .file-status { background-color: #dc3545; color: #fff; }
-.renamed .file-status { background-color: #17a2b8; color: #fff; }
-.conflicted .file-status { background-color: #dc3545; color: #fff; }
-.staged .file-status { background-color: #6c757d; color: #fff; }
+.commit-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
 
-#stagedFiles, #changedFiles {
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ced4da;
+.commit-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.push-button {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
     border-radius: 4px;
-    padding: 8px;
-    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.force-push-label {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.force-push-label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#stageAllFiles,
+#unstageAllFiles {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#stageAllFiles {
+    background-color: var(--primary-color);
+}
+
+#unstageAllFiles {
+    background-color: var(--primary-color);
+}
+
+/* Status-specific colors */
+.staged .file-status {
+    background-color: #ffffff;
+    border-color: #2ecc71;
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+}
+
+.modified .file-status {
+    background-color: #ffffff;
+    border-color: #f39c12;
+    border: 1px solid #f39c12;
+    color: #f39c12;
+}
+
+.new .file-status {
+    background-color: #ffffff;
+    border-color: #3498db;
+    border: 1px solid #3498db;
+    color: #3498db;
+}
+
+.deleted .file-status {
+    background-color: #ffffff;
+    border-color: #e74c3c;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+}
+
+.renamed .file-status {
+    background-color: #ffffff;
+    border-color: #9b59b6;
+    border: 1px solid #9b59b6;
+    color: #9b59b6;
+}
+
+.conflicted .file-status {
+    background-color: #ffffff;
+    border-color: #e67e22;
+    border: 1px solid #e67e22;
+    color: #e67e22;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
