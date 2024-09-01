@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git GUI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Git GUI</h1>
+    <div class="container">
+        <div class="left-panel">
+            <button id="selectDirectory">Select Git Repository</button>
+            <p id="selectedDir"></p>
+            <div id="repoContent" style="display: none;">
+                <p id="currentBranch"></p>
+                <button id="fetchBranches">Fetch Branches</button>
+                <ul id="branchList"></ul>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div id="statusDisplay" style="display: none;">
+                <h2>Repository Status</h2>
+                <button id="stageAllFiles">Stage All Files</button>
+                <h3>Changed Files</h3>
+                <ul id="changedFiles"></ul>
+                <h3>Staged Files</h3>
+                <ul id="stagedFiles"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="errorMessage" class="error" style="display: none;"></div>
+    <script src="index.js"></script>
+</body>
+</html>

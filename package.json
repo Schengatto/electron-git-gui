@@ -1,0 +1,36 @@
+{
+  "name": "electron-git-gui",
+  "version": "0.0.1",
+  "description": "A simple GUI interface for git commands",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "build": "npm run clean && tsc && npm run copy-files && electron-builder build",
+    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
+    "clean": "rimraf dist",
+    "prebuild": "tsc"
+  },
+  "keywords": [
+    "electron",
+    "git",
+    "gui"
+  ],
+  "author": {
+    "name": "Enrico Schintu",
+    "email": "schengatto@gmail.com",
+    "url": "https://enricoschintu.altervista.org/"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "22.5.1",
+    "copyfiles": "2.4.1",
+    "electron": "32.0.1",
+    "electron-builder": "24.13.3",
+    "rimraf": "6.0.1",
+    "simple-git": "3.25.0",
+    "typescript": "5.5.4"
+  },
+  "optionalDependencies": {
+    "dmg-license": "1.0.11"
+  }
+}
