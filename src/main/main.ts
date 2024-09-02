@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import * as path from 'path';
 import simpleGit, { SimpleGit } from 'simple-git';
 
@@ -9,7 +9,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1100,
     height: 800,
-    autoHideMenuBar: true, // This line hides the menu bar
+    // autoHideMenuBar: true, // This line hides the menu bar
     webPreferences: {
       preload: path.join(__dirname, '..', 'preload', 'preload.js'),
       contextIsolation: true,
@@ -173,12 +173,50 @@ app.whenReady().then(() => {
     }
   });
 
+  ipcMain.handle('git:getTree', async (_: any, maxCount: number = 50) => {
+    try {
+      const result = await git.raw([
+        'log',
+        '--graph',
+        '--decorate',
+        '--oneline',
+        '--all',
+        '--color',
+        `-n ${maxCount}`
+      ]);
+      return result;
+    } catch (error) {
+      console.error('Git tree error:', error);
+      return null;
+    }
+  });
+
+  ipcMain.handle('git:getCommitHistory', async (_: any, days: number = 30) => {
+    try {
+      const sinceDate = new Date();
+      sinceDate.setDate(sinceDate.getDate() - days);
+      const logs = await git.log({
+        '--since': sinceDate.toISOString().split('T')[0] // Use only the date part
+      });
+      return logs.all.map(commit => ({
+        date: commit.date,
+        message: commit.message,
+        hash: commit.hash,
+        author: commit.author_name
+      }));
+    } catch (error) {
+      console.error('Git commit history error:', error);
+      return null;
+    }
+  });
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
 });
+
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

@@ -282,3 +282,14 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+#gitTreeContainer {
+    font-family: monospace;
+    white-space: pre;
+    overflow-x: auto;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    line-height: 1.2;
+}

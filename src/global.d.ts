@@ -1,5 +1,12 @@
 export {};
 
+interface CommitLogs {
+  date: string;
+  message: string;
+  hash: string;
+  autor: string;
+}
+
 declare global {
   interface Window {
     electronAPI: {
@@ -26,6 +33,8 @@ declare global {
       commit: (message: string) => Promise<boolean>;
       push: (force: boolean) => Promise<boolean>;
       hasCommitsToPush: () => Promise<boolean>;
+      getCommitHistory: (days: number) => Promise<CommitLogs[]>;
+      getGitTree: (maxCount: number) => Promise<string>;
     };
     updateGitGraph: (local: string[], remote: string[], current: string) => void;
   }

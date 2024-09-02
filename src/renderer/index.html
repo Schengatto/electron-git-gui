@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Git GUI</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container" id="pageContainer">
         <div class="left-panel">
@@ -30,7 +32,8 @@
                 <ul id="stagedFiles"></ul>
                 <div id="commitSection">
                     <form id="commitForm" class="commit-form">
-                        <input type="text" id="commitMessage" placeholder="Commit message" required class="commit-input">
+                        <input type="text" id="commitMessage" placeholder="Commit message" required
+                            class="commit-input">
                         <button type="submit" class="commit-button">Commit</button>
                     </form>
                 </div>
@@ -44,8 +47,14 @@
             </div>
         </div>
     </div>
+    <div id="gitTreeSection">
+        <h3>Git Tree</h3>
+        <pre id="gitTreeContainer"></pre>
+    </div>
     <div id="errorMessage" class="error" style="display: none;"></div>
     <script src="index.js"></script>
     <script src="edited-files.js"></script>
+    <script src="git-tree.js"></script>
 </body>
+
 </html>

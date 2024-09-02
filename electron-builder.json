@@ -1,26 +1,35 @@
 {
-    "appId": "dev.schengatto.gitgui",
-    "productName": "Git GUI",
-    "files": [
-      "dist/**/*",
-      "package.json"
-    ],
-    "directories": {
-      "output": "build"
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ]
-    },
-    "win": {
-      "target": "nsis"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
+  "appId": "dev.schengatto.gitgui",
+  "productName": "Git GUI",
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "directories": {
+    "output": "build"
+  },
+  "extraResources": [
+    {
+      "from": "build/preload",
+      "to": "preload",
+      "filter": [
+        "**/*"
       ]
     }
+  ],
+  "mac": {
+    "target": [
+      "dmg",
+      "zip"
+    ]
+  },
+  "win": {
+    "target": "nsis"
+  },
+  "linux": {
+    "target": [
+      "AppImage",
+      "deb"
+    ]
   }
+}

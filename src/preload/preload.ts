@@ -13,4 +13,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   commit: (message: string) => ipcRenderer.invoke('git:commit', message),
   push: (force: boolean) => ipcRenderer.invoke('git:push', force),
   hasCommitsToPush: () => ipcRenderer.invoke('git:hasCommitsToPush'),
+  getCommitHistory: (days: number) => ipcRenderer.invoke('git:getCommitHistory', days),
+  getGitTree: (maxCount: number) => ipcRenderer.invoke('git:getTree', maxCount),
 });
